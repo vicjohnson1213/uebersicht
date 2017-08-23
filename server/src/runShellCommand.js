@@ -5,7 +5,7 @@ module.exports = function runShellCommand(command, callback) {
     .send(command)
     .end((err, res) => {
       if (callback) {
-        const error = err ? res.text || 'error running command' : null;
+        const error = err ? (res && res.text) || 'error running command' : null;
         const output = res.text;
         callback(error, output);
       }
